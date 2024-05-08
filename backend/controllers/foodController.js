@@ -35,7 +35,7 @@ const listFood = async (req, res) => {
     try {
         const foods = await foodModel.find({});
         res.json({
-            status: 'succes',
+            status: 'success',
             data: foods
         })
     } catch (error) {
@@ -57,7 +57,7 @@ const deleteFoodItem = async (req, res) => {
         res.json({
             status: 'success',
             data: null,
-            message: `Food Item ${foodItem.name} is deleted`
+            message: `Food Item ${foodItem.name} is deleted successfully`
         })
 
     } catch (error) {

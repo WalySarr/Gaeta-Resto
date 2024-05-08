@@ -22,6 +22,9 @@ hr {
     height: 1px;
     background-color: #a9a9a9;
 }
+p{
+    margin-bottom: 0 !important;
+}
 
 .app-content {
     display: flex;
