@@ -19,8 +19,9 @@ a {
 
 hr {
     border: none;
-    height: 1px;
-    background-color: #a9a9a9;
+    height: 1.8px !important;
+    background-color: #5e5d5d;
+    margin-bottom: 0;
 }
 p{
     margin-bottom: 0 !important;
