@@ -3,12 +3,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import './List.css';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 const List = ({ url }) => {
     const [list, setList] = useState([]);
+    const navigate = useNavigate();
 
     const fetchList = async () => {
         const response = await axios.get(`${url}/api/food/list`);
@@ -49,7 +51,14 @@ const List = ({ url }) => {
             }
         }
     };
+    const editFood = (food) => {
+        // Rediriger vers la page d'édition avec les informations de l'aliment
+        navigate(`/update?id=${food._id}`);
+    };
 
+    useEffect(() => {
+        fetchList();
+    }, []);
     useEffect(() => {
         fetchList();
     }, []);
@@ -77,6 +86,12 @@ const List = ({ url }) => {
                                 className="btn btn-sm btn-dark w-50 w-lg-50"
                             >
                                 <i className="bi bi-trash"></i>{' '}
+                            </button>
+                            <button
+                                onClick={() => editFood(item)}
+                                className="btn btn-sm btn-warning w-50 w-lg-50"
+                            >
+                                <i className="bi bi-pen"></i>{' '}
                             </button>
                         </div>
                     );
