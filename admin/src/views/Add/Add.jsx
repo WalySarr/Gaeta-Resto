@@ -6,7 +6,7 @@ import { assets } from '../../assets/assets';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const Add = ({url}) => {
+const Add = ({ url }) => {
     const [image, setImage] = useState(false);
     const [data, setData] = useState({
         name: '',
@@ -88,14 +88,18 @@ const Add = ({url}) => {
                     <div className="add-category flex-col">
                         <p>Product category</p>
                         <select onChange={onChangeHandler} name="category" required>
-                        <option value="Salad">Salad</option>
+                            <option value="Salad">Salad</option>
                             <option value="Carpaccio">Carpaccio</option>
-                            <option value="Desserts">Desserts</option>
+                            <option value="Deserts">Deserts</option>
                             <option value="Panozzo">Panozzo</option>
                             <option value="Gnocci">Gnocci</option>
                             <option value="Caldi">Caldi</option>
                             <option value="Pasta">Pasta</option>
                             <option value="Pizza">Pizza</option>
+                            <option value="Ravioli">Ravioli</option>
+                            <option value="Poissons">Poissons</option>
+                            <option value="Piatti">Piatti</option>
+                            <option value="Risotto">Risotto</option>
                         </select>
                     </div>
                     <div className="add-price flex-col">
