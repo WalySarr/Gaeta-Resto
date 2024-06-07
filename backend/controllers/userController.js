@@ -17,7 +17,7 @@ const loginUser = async (req, res) => {
         if (!isMatch) return res.status(401).json({ success: false, message: 'Invalid credentials' })
         // create and sign json web token
         const token = createToken(user._id)
-        res.json({ success: true, token })
+        res.json({ success: true, token, username: user.name });
 
     } catch (error) {
         console.log(error);
@@ -59,7 +59,7 @@ const registerUser = async (req, res) => {
         const user = await newUser.save()
         const token = createToken(user._id)
         // return response with token
-        res.json({ success: true, token })
+        res.json({ success: true, token, username: user.name }); // Ajoutez le nom de l'utilisateur ici
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "Error server" })
