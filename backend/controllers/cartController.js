@@ -51,4 +51,17 @@ const getCart = async (req, res) => {
     }
 }
 
-export { addToCart, removeFromCart, getCart }
+// Clear user cart
+const clearCart = async (req, res) => {
+    try {
+        let userData = await userModel.findById(req.body.userId);
+        userData.cartData = {}; // Reset cart data to an empty object
+        await userModel.findByIdAndUpdate(req.body.userId, { cartData: userData.cartData });
+        res.json({ success: true, message: "Cart cleared successfully" });
+    } catch (error) {
+        console.log('Error in clearing the cart', error);
+        res.json({ success: false, message: "Error in clearing the cart" });
+    }
+}
+
+export { addToCart, removeFromCart, getCart, clearCart }
