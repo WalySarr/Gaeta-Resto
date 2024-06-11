@@ -1,67 +1,99 @@
-import { response } from "express";
-import userModel from "../models/userModel.js";
+import userModel from '../models/userModel.js';
 
-// add Items to user cart
+// Add Items to user cart
 const addToCart = async (req, res) => {
     try {
-        let userData = await userModel.findOne({ _id: req.body.userId })
-        let cartData = await userData.cartData
-        if (!cartData[req.body.itemId]) {
-            cartData[req.body.itemId] = 1
+        let userData;
+        if (req.isAuthenticated) {
+            // Utilisateur connecté
+            userData = await userModel.findOne({ _id: req.body.userId });
+
+        } else {
+            // Utilisateur non connecté
+            userData = req.session.cart || { cartData: {} };
+
         }
-        else {
+        let cartData = userData.cartData || {};
+        // Votre logique d'ajout au panier ici
+        if (!cartData[req.body.itemId]) {
+            cartData[req.body.itemId] = 1;
+        } else {
             cartData[req.body.itemId] += 1;
         }
-        await userModel.findByIdAndUpdate(req.body.userId, { cartData })
-        res.json({ success: true, message: "Added To Cart" })
+        if (req.isAuthenticated) {
+            await userModel.findByIdAndUpdate(req.body.userId, { cartData });
+        } else {
+            req.session.cart = { cartData };
+        }
+        res.json({ success: true, message: 'Added To Cart' });
     } catch (error) {
-        console.log("Error in adding item to the cart", error);
-        res.json({ success: false, message: "Error" })
+        console.log('Error in adding item to the cart', error);
+        res.json({ success: false, message: 'Error' });
     }
-}
+};
 
-// remove Items from user cart
+// Remove Items from user cart
 const removeFromCart = async (req, res) => {
     try {
-        let userData = await userModel.findById(req.body.userId)
-        let cartData = await userData.cartData
-
-        if (cartData[req.body.itemId] > 0) {
-            cartData[req.body.itemId] -= 1
+        let userData;
+        if (req.isAuthenticated) {
+            // Utilisateur connecté
+            userData = await userModel.findById(req.body.userId);
+        } else {
+            // Utilisateur non connecté
+            userData = req.session.cart || { cartData: {} };
         }
-        await userModel.findByIdAndUpdate(req.body.userId, { cartData })
-        res.json({ success: true, message: "Remove From Cart Successfully" })
+        let cartData = userData.cartData || {};
+        // Votre logique de suppression du panier ici
+        if (cartData[req.body.itemId] > 0) {
+            cartData[req.body.itemId] -= 1;
+        }
+        if (req.isAuthenticated) {
+            await userModel.findByIdAndUpdate(req.body.userId, { cartData });
+        } else {
+            req.session.cart = { cartData };
+        }
+        res.json({ success: true, message: 'Remove From Cart Successfully' });
     } catch (error) {
-        console.log('Error in removing Item from the cart', error)
-        res.json({ success: false, message: "Error In Removing The Item" })
+        console.log('Error in removing Item from the cart', error);
+        res.json({ success: false, message: 'Error In Removing The Item' });
     }
-}
+};
 
-//fetch user cart data
+// Fetch user cart data
 const getCart = async (req, res) => {
     try {
-        let userData = await userModel.findById(req.body.userId)
-        let cartData = await userData.cartData
-
-        res.json({ success: true, cartData })
-
+        let userData;
+        if (req.isAuthenticated) {
+            // Utilisateur connecté
+            userData = await userModel.findById(req.body.userId);
+        } else {
+            // Utilisateur non connecté
+            userData = req.session.cart || { cartData: {} };
+        }
+        let cartData = userData.cartData || {};
+        res.json({ success: true, cartData });
     } catch (error) {
-        console.log('Error in getting User Cart Data ', error)
-        res.json({ success: false, message: "Error In Fetching Your Cart" })
+        console.log('Error in getting User Cart Data ', error);
+        res.json({ success: false, message: 'Error In Fetching Your Cart' });
     }
-}
+};
 
 // Clear user cart
 const clearCart = async (req, res) => {
     try {
-        let userData = await userModel.findById(req.body.userId);
-        userData.cartData = {}; // Reset cart data to an empty object
-        await userModel.findByIdAndUpdate(req.body.userId, { cartData: userData.cartData });
-        res.json({ success: true, message: "Cart cleared successfully" });
+        if (req.isAuthenticated) {
+            // Utilisateur connecté
+            // await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+        } else {
+            // Utilisateur non connecté
+            req.session.cart = { cartData: {} };
+        }
+        res.json({ success: true, message: 'Cart cleared successfully' });
     } catch (error) {
         console.log('Error in clearing the cart', error);
-        res.json({ success: false, message: "Error in clearing the cart" });
+        res.json({ success: false, message: 'Error in clearing the cart' });
     }
-}
+};
 
-export { addToCart, removeFromCart, getCart, clearCart }
+export { addToCart, removeFromCart, getCart, clearCart };

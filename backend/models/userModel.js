@@ -4,9 +4,9 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    cartData: { type: Object, default: {} }
-}, { minimize: false })
+    cartData: { type: Object, default: {} } // Valeur par défaut définie comme un objet vide
+}, { minimize: false });
 
-const userModel = mongoose.model.user || mongoose.model('user', userSchema)
+const userModel = mongoose.models.user || mongoose.model('user', userSchema);
 
-export default userModel
+export default userModel;
