@@ -1,15 +1,15 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Orders.css';
-import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 import { assets } from '../../assets/assets.js';
+import Pagination from '../Pagination/Pagination.jsx';
 
 const Orders = ({ url }) => {
     const [orders, setOrders] = useState([]);
+    const [activeIndex, setActiveIndex] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [ordersPerPage] = useState(10); // Nombre d'éléments par page
 
     const fetchAllOrders = async () => {
         const response = await axios.get(url + '/api/order/list');
@@ -26,7 +26,7 @@ const Orders = ({ url }) => {
             status: event.target.value,
         });
         if (response.data.success) {
-            await fetchAllOrders()
+            await fetchAllOrders();
         }
     };
 
@@ -35,12 +35,35 @@ const Orders = ({ url }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleItemClick = (index) => {
+        setActiveIndex(index);
+    };
+
+    // Logique de pagination
+    const indexOfLastOrder = currentPage * ordersPerPage;
+    const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+    const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div className="order add">
-            <h3>Order Page</h3>
+            <div className="header d-flex justify-content-between align-items-center">
+                <h3>Order Page</h3>
+                <Pagination
+                    ordersPerPage={ordersPerPage}
+                    totalOrders={orders.length}
+                    paginate={paginate}
+                    currentPage={currentPage} // Pass the currentPage to Pagination component
+                />
+            </div>
             <div className="order-list">
-                {orders.map((order, index) => (
-                    <div className="order-item" key={index}>
+                {currentOrders.map((order, index) => (
+                    <div
+                        className={`order-item ${index === activeIndex ? 'active' : ''}`}
+                        key={index}
+                        onClick={() => handleItemClick(index)}
+                    >
                         <img src={assets.parcel_icon} alt="icon" />
                         <div>
                             <p className="order-item-food">
@@ -52,26 +75,15 @@ const Orders = ({ url }) => {
                                     }
                                 })}
                             </p>
-                            <p className="order-item-name">
-                                {order.address.firstName + ' ' + order.address.lastName}
-                            </p>
+                            <p className="order-item-name">{order.address.firstName}</p>
                             <div className="order-item-address">
-                                <p>{order.address.street + ', '}</p>
-                                <p>
-                                    {order.address.city +
-                                        ', ' +
-                                        order.address.state +
-                                        ', ' +
-                                        order.address.city +
-                                        ', ' +
-                                        order.address.zipcode +
-                                        ', '}
-                                </p>
+                                <p>{order.address.address + ', '}</p>
+                                <p>{order.date}</p>
                             </div>
                             <p className="order-item-phone">{order.address.phone}</p>
                         </div>
-                        <p>Items : {order.items.length}</p>
-                        <p>درهم {order.amount} (MAD) </p>
+                        <p>Items: {order.items.length}</p>
+                        <p>درهم {order.amount} (MAD)</p>
                         <select
                             onChange={(event) => statusHandler(event, order._id)}
                             value={order.status}
