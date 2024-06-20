@@ -95,26 +95,29 @@ const updateFood = async (req, res) => {
         const foodId = req.params.id;
         const { name, description, price, category } = req.body;
 
-        // Vérifier si l'ID de la nourriture est fourni dans la requête
+        // Log les données reçues
+        console.log('Received body:', req.body);
+        console.log('Received file:', req.file);
+
         if (!foodId) {
             return res.status(400).json({ status: 'fail', message: 'Food ID is missing' });
         }
 
-        // Vérifier si l'élément de nourriture existe dans la base de données
         const foodItem = await foodModel.findById(foodId);
         if (!foodItem) {
             return res.status(404).json({ status: 'fail', message: 'Food Item not found' });
         }
 
-        // Mettre à jour les propriétés de l'élément de nourriture si elles sont fournies dans la requête
+        console.log('Before update:', foodItem);
+
         if (name) foodItem.name = name;
         if (description) foodItem.description = description;
         if (price) foodItem.price = price;
         if (category) foodItem.category = category;
 
-        // Vérifier s'il y a une nouvelle image envoyée
         if (req.file) {
-            // Supprimer l'ancienne image du serveur si elle existe
+            console.log('File received:', req.file);
+
             if (foodItem.image) {
                 fs.unlink(`uploads/${foodItem.image}`, (err) => {
                     if (err) {
@@ -122,12 +125,12 @@ const updateFood = async (req, res) => {
                     }
                 });
             }
-            // Enregistrer le nouveau nom de fichier de l'image
             foodItem.image = req.file.filename;
         }
 
-        // Sauvegarder les modifications
         await foodItem.save();
+
+        console.log('After update:', foodItem);
 
         res.json({
             status: 'success',
@@ -142,6 +145,7 @@ const updateFood = async (req, res) => {
         });
     }
 }
+
 
 
 export { addFood, listFood, deleteFoodItem, updateFood, getFoodById };
