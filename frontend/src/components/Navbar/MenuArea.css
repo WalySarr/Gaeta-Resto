@@ -1,0 +1,170 @@
+.menu-area-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    /* backdrop-filter: blur(5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); */
+}
+
+.menu-area-section .menu-are__logo {
+    width: 100px;
+}
+
+.menu-area-section .menu-are__links a {
+    color: black;
+    font-weight: 500;
+    align-items: center;
+    padding: 7px 20px;
+    margin-left: 5px;
+}
+.menu-are__links a.active,
+.menu-are__links a:hover {
+    background-color: #d66f50;
+    border-radius: 20px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.menu-area-section button {
+    --primary-color: black;
+    --secondary-color: #fff;
+    --hover-color: #d66f50;
+    --arrow-width: 10px;
+    --arrow-stroke: 2px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 20px;
+    color: var(--secondary-color);
+    padding: 7px 30px;
+    background: var(--primary-color);
+    display: flex;
+    transition: 0.2s background;
+    align-items: center;
+    gap: 0.6em;
+    font-weight: bold;
+}
+
+.menu-area-section button .arrow-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-area-section button .arrow {
+    margin-top: 1px;
+    width: var(--arrow-width);
+    background: var(--primary-color);
+    height: var(--arrow-stroke);
+    position: relative;
+    transition: 0.2s;
+}
+
+.menu-area-section button .arrow::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    border: solid var(--secondary-color);
+    border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+    display: inline-block;
+    top: -3px;
+    right: 3px;
+    transition: 0.2s;
+    padding: 3px;
+    transform: rotate(-45deg);
+}
+
+.menu-area-section button:hover {
+    background-color: var(--hover-color);
+}
+
+.menu-area-section button:hover .arrow {
+    background: var(--secondary-color);
+}
+
+.menu-area-section button:hover .arrow:before {
+    right: 0;
+}
+.menu-are__btn {
+    position: relative;
+}
+
+.menu-are__btn .user-pic {
+    cursor: pointer;
+}
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    width: 320px;
+    color: white;
+    z-index: 200;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+.menu-are__btn:hover .sub-menu-wrap {
+    max-height: 400px;
+}
+.sub-menu-wrap.open-menu {
+    max-height: 400px;
+}
+.sub-menu {
+    background: #d66f50;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+}
+.user-info h3 {
+    font-weight: 600;
+    margin-bottom: 0 !important;
+}
+.user-info img {
+    width: 30px;
+    margin-right: 15px;
+}
+.sub-menu hr {
+    border: 0;
+    height: 2px;
+    width: 100%;
+    background: white;
+    margin: 15px 0 10px;
+}
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin: 12px 0;
+    color: #ffff;
+}
+.sub-menu-link p {
+    width: 100%;
+}
+.sub-menu-link img,
+.sub-menu-link i {
+    width: 40px;
+    background: #e5e5e5;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+.sub-menu-link i {
+    font-size: 20px;
+    padding: 5px 10px;
+    color: #525252;
+}
+.sub-menu-link span {
+    font-size: 22px;
+    transition: transform 0.5s;
+}
+.sub-menu-link:hover span {
+    transform: translateX(5px);
+}
+.sub-menu-link:hover p {
+    font-weight: 600;
+}

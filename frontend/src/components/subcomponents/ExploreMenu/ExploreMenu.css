@@ -1,0 +1,123 @@
+.explore-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.explore-menu.sticky {
+    background-color: rgba(255, 255, 255, 0.9);
+    position: sticky;
+    top: -20vw;
+    margin: -6vw;
+    z-index: 1020;
+    transition: 1s ease-in-out;
+    backdrop-filter: blur(8px);
+}
+.explore-menu.sticky .explore-menu-text,
+.explore-menu.sticky .explore-menu-list p {
+    color: #000;
+    transition: 3s ease-in-out;
+}
+.explore-menu h1 {
+    color: #262626;
+    font-weight: 500;
+    text-align: start;
+}
+.explore-menu-text {
+    max-width: 60%;
+    color: #808080;
+    margin-bottom: 0 !important;
+}
+.explore-menu.sticky h1,
+.explore-menu.sticky .explore-menu-text {
+    opacity: 0;
+    /* display: none; */
+}
+.explore-menu-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    margin: 20px 0px;
+    overflow-x: scroll;
+}
+.explore-menu-list::-webkit-scrollbar {
+    display: none;
+}
+.explore-menu-list-item img {
+    width: 7.5vw;
+    min-width: 80px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.2s;
+    float: unset;
+    margin: 0;
+}
+.explore-menu-list-item p {
+    margin: 10px 0 0;
+    color: #747474;
+    font-size: max(1.2vw, 16px);
+    cursor: pointer;
+}
+.explore-menu hr {
+    margin: 10px 0;
+    height: 2px;
+    background-color: #747674;
+    border: none;
+}
+.explore-menu-list .active {
+    border: 4px solid tomato;
+    padding: 2px;
+}
+.explore-menu-list .active + p,
+.explore-menu-menu.sticky .active + p {
+    color: tomato !important;
+    transition: 0s !important;
+}
+
+@media screen and (max-width: 770px) {
+    .explore-menu-text {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .explore-menu.sticky {
+        top: -18vh;
+        margin: 0 -6vw 5px;
+        backdrop-filter: none;
+        background-color: #fff;
+    }
+}
+
+/* Pour les petits mobiles en mode paysage */
+@media (max-width: 768px) and (orientation: landscape) {
+    .explore-menu.sticky {
+        top: -16vh;
+        margin: 0 -7vw 7px;
+    }
+}
+
+/* Pour les écrans de tablettes */
+@media (min-width: 768px) {
+    .explore-menu.sticky {
+        top: -10vh;
+        margin: 0 -7vw 7px;
+    }
+}
+
+/* Pour les écrans d'ordinateurs portables */
+@media (min-width: 1024px) {
+    .explore-menu.sticky {
+        top: -10vh;
+        margin: 0 -7vw 150px;
+    }
+}
+
+/* Pour les grands écrans de bureau */
+@media (min-width: 1440px) {
+    .explore-menu.sticky {
+        top: -18vh;
+        margin: 0 -7vw 50px;
+    }
+}

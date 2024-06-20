@@ -1,0 +1,79 @@
+.home-page {
+    height: 90vh;
+    padding-top: 20px;
+    display: flex;
+}
+.home-page .home-page__left {
+    width: 40%;
+}
+.home-page .home-page__right {
+    width: 60%;
+}
+/* Pour les petits écrans (téléphones) */
+@media (min-width: 100px) and (max-width: 499px) {
+    .hamburger__menu {
+        display: flex;
+    }
+    .menu-area-section {
+        display: none;
+    }
+    .home-page {
+        flex-direction: column; /* Empile les sections verticalement */
+        height: auto; /* Ajuste la hauteur automatiquement */
+    }
+    .home-page .home-page__left,
+    .home-page .home-page__right {
+        width: 100%; /* Prend 100% de la largeur */
+    }
+}
+
+/* Pour les petits écrans (téléphones) */
+@media (min-width: 500px) and (max-width: 800px) {
+    .hamburger__menu {
+        display: flex;
+    }
+    .menu-area-section {
+        display: none;
+    }
+    .home-page {
+        flex-direction: column; /* Empile les sections verticalement */
+        height: auto; /* Ajuste la hauteur automatiquement */
+    }
+    .home-page .home-page__left,
+    .home-page .home-page__right {
+        width: 100%; /* Prend 100% de la largeur */
+    }
+}
+
+/* Pour les tablettes */
+@media (min-width: 801px) and (max-width: 1024px) {
+    .home-page {
+        flex-direction: column; /* Alignement horizontal */
+    }
+    .home-page .home-page__left {
+        width: 100%; /* Ajuste la largeur à 50% */
+    }
+    .home-page .home-page__right {
+        width: 100%; /* Ajuste la largeur à 50% */
+    }
+}
+
+/* Pour les écrans moyens (ordinateurs portables) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    /* .home-page .home-page__left {
+        width: 40%;
+    }
+    .home-page .home-page__right {
+        width: 60%;
+    } */
+}
+
+/* Pour les grands écrans (ordinateurs de bureau) */
+@media (min-width: 1441px) {
+    .home-page .home-page__left {
+        width: 40%;
+    }
+    .home-page .home-page__right {
+        width: 60%;
+    }
+}

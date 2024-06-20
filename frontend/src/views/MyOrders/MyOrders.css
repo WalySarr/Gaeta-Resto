@@ -1,0 +1,94 @@
+p {
+    margin-bottom: 0 !important;
+}
+img {
+    float: unset;
+    margin: 0;
+}
+.my-orders {
+    margin: 50px 0;
+}
+.order-header{
+    width: 100%;
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+.order-header select{
+    max-width: 200px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 500;
+}
+.my-orders .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+.my-orders-order {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 2fr 1fr;
+    align-items: center;
+    gap: 30px;
+    font-size: 14px;
+    padding: 10px 20px;
+    color: #454545;
+    border: 2px solid tomato;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.my-orders-order img {
+    width: 50px;
+}
+.my-orders-order p span {
+    color: tomato;
+}
+.my-orders-order p b {
+    font-weight: 500;
+    color: #454545;
+}
+.my-orders-order button {
+    border: none;
+    padding: 12px 0px;
+    border-radius: 4px;
+    background-color: #ffe1e1;
+    cursor: pointer;
+    color: #454545;
+}
+.my-orders-order button:hover {
+    background-color: tomato;
+    color: white;
+}
+.my-orders-order:hover {
+    transform: translate(10px);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.my-orders-order.food-processing {
+    background: red;
+    color: white;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.my-orders-order.food-processing span {
+    color: white;
+}
+.my-orders-order.food-processing b {
+    color: white;
+}
+.my-orders-order.food-processing button:hover {
+    color: white;
+    background-color: black;
+}
+
+@media (max-width: 900px) {
+    .my-orders-order {
+        grid-template-columns: 1fr 2fr 1fr;
+        row-gap: 5px;
+        font-size: 12px;
+    }
+    .my-orders-order button {
+        padding: 8px 0px;
+        font-size: 12px;
+    }
+}

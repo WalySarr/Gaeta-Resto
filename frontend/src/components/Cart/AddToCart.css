@@ -1,0 +1,115 @@
+.cart-section {
+    width: 90%;
+}
+.cart-header {
+    margin: 5vh 0;
+}
+.cart-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+.cart-body {
+    background-color: white;
+    min-height: 50vh;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.12);
+}
+.cart-items-title {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    align-items: center;
+    color: rgb(7, 4, 4);
+    font-size: max(1vw, 12px);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.cart-item-content {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1.2fr 1fr;
+    align-items: center;
+}
+.cart-item-content img {
+    width: 30px;
+}
+.cart-item-content .food-item-counter {
+    right: 0;
+    bottom: 0;
+    width: max-content;
+}
+.cart-item-content .food-item-counter img {
+    width: 30px;
+}
+.cart-item-info {
+    display: flex;
+}
+.cart-item-info .image {
+    width: 75px;
+    height: 100px;
+    border-radius: 10px;
+    flex: none;
+}
+.cart-item-info .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.cart-item-info .info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    height: 9vh;
+    border: red;
+    justify-content: center;
+    padding-left: 10px;
+}
+.cart-item-info .info p {
+    font-size: 15px;
+    font-weight: 600;
+}
+.cart-item-info .info .category-name {
+    font-size: 14px;
+    color: rgba(128, 128, 128, 0.671);
+}
+
+@media (max-width: 992px) {
+    .cart-section {
+        width: auto;
+    }
+}
+@media (max-width: 800px) {
+    .cart-items-title {
+        display: none;
+    }
+    .cart-item-info .info {
+        height: 11vh;
+    }
+}
+@media (max-width: 768px) and (min-width: 550px) {
+    .cart-items-title {
+        display: none;
+    }
+    .cart-item-info .info {
+        height: 11vh;
+    }
+    .cart-item-content {
+        grid-template-columns: 2fr 1fr 1.2fr 1fr;
+    }
+    .cart-item-content span {
+        text-align: center;
+    }
+    .cart-item-content .food-item-counter {
+        margin: auto;
+    }
+}
+@media (max-width: 549px) {
+    .cart-item-content {
+        grid-template-columns: 3fr 1fr;
+    }
+    .cart-item-content .food-item-counter,
+    .cart-item-content .total-price {
+        margin-top: 5px;
+    }
+}

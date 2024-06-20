@@ -1,0 +1,105 @@
+.place-order-section {
+    width: 30%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5vh 0;
+    padding: 25px 15px 10px;
+}
+.place-order-section__header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.place-order-section__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.place-order-section input,
+.palce-order-btn {
+    padding: 10px;
+    border-radius: 50px;
+    border: none;
+    background-color: #eff3f6;
+}
+.place-order-section input:focus {
+    border: 1px solid saddlebrown;
+    outline: none;
+    transition: 0.3s ease-in;
+}
+.palce-order-btn {
+    background-color: black;
+    color: white;
+    font: 1.2em sans-serif;
+}
+.palce-order-btn:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.12);
+}
+.place-order-section input::placeholder {
+    color: rgba(0, 0, 0, 0.867);
+    font-weight: 500;
+}
+.place-order-section input:-moz-placeholder {
+    color: rgba(0, 0, 0, 0.867);
+    font-weight: 500;
+}
+.place-order-section .inputs-flex {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.place-order-section .zip-code {
+    background: white;
+    border: 1px solid #c7c9ca;
+}
+.coupon-detail {
+    font-size: 12px;
+    color: #434343;
+}
+.coupon-code input::placeholder {
+    font-style: italic;
+    font-size: 13px;
+}
+.cart-purchase {
+    background-color: tomato;
+    padding: 10px;
+    border-radius: 15px;
+}
+.cart-purchase button {
+    background-color: white;
+    color: #000;
+    width: 75% !important;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cart-payment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+}
+.error {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 1000px) and (min-width: 992px) {
+    .place-order-section {
+        width: 35%;
+    }
+}
+@media (max-width: 992px) {
+    .place-order-section {
+        width: auto;
+    }
+}

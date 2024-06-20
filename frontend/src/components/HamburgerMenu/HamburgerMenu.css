@@ -1,0 +1,109 @@
+.hamburger__menu {
+    display: none;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hamburger__nav {
+    cursor: pointer;
+}
+
+.hamburger__nav input {
+    display: none;
+}
+
+.hamburger__nav svg {
+    /* The size of the SVG defines the overall size */
+    height: 3em;
+    /* Define the transition for transforming the SVG */
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+    fill: none;
+    stroke: black;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    /* Define the transition for transforming the Stroke */
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+    stroke-dasharray: 12 63;
+}
+
+.hamburger__nav input:checked + svg {
+    transform: rotate(-45deg);
+}
+
+.hamburger__nav input:checked + svg .line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    z-index: 1000;
+    justify-content: space-between;
+}
+.sidebar .hamburger__logo {
+    margin-bottom: 50px;
+}
+.sidebar .navigation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.sidebar .navigation .links {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar a {
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Rubik', sans-serif;
+}
+.sidebar .navigation a.active {
+    color: white;
+    background-color: #d66f50;
+}
+.sidebar a:hover {
+    background: tomato;
+    color: white;
+}
+
+.sidebar.open {
+    right: 0;
+}
+.login-button {
+    padding: 10px 20px;
+    background-color: #d66f50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+}
+
+.login-button:hover {
+    background-color: #e5533d;
+}
