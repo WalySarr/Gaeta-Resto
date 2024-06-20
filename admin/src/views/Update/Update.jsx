@@ -46,21 +46,36 @@ const Update = ({ url }) => {
         setFoodData({ ...foodData, [name]: value });
     };
 
+    // Gestionnaire de changement pour les fichiers
+    const handleFileChange = (e) => {
+        setFoodData({ ...foodData, image: e.target.files[0] });
+    };
+
     // Gestionnaire de soumission du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${url}/api/food/update/${foodId}`, {
-                name: foodData.name,
-                description: foodData.description,
-                price: foodData.price,
-                category: foodData.category,
-                image: foodData.image,
+            const formData = new FormData();
+            formData.append('name', foodData.name);
+            formData.append('description', foodData.description);
+            formData.append('price', foodData.price);
+            formData.append('category', foodData.category);
+            if (foodData.image) {
+                formData.append('image', foodData.image);
+            }
+
+            // Log les données avant l'envoi
+            console.log('FormData entries:', [...formData.entries()]);
+
+            const response = await axios.put(`${url}/api/food/update/${foodId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
+
             if (response.data.status === 'success') {
                 toast.success(response.data.message);
                 history('/list'); // Rediriger vers la liste après la mise à jour
-                console.log(response.data);
             } else {
                 toast.error(response.data.message);
             }
@@ -73,6 +88,7 @@ const Update = ({ url }) => {
     useEffect(() => {
         console.log('foodData changed:', foodData);
     }, [foodData]);
+
     return (
         <div className="add">
             <form className="flex-col update" onSubmit={handleSubmit}>
@@ -88,7 +104,7 @@ const Update = ({ url }) => {
                             alt=""
                         />
                     </label>
-                    <input type="file" id="image" hidden />
+                    <input type="file" id="image" onChange={handleFileChange} hidden />
                 </div>
                 <div className="add-product-name flex-col">
                     <p>Product name</p>
